@@ -1,0 +1,20 @@
+service: iq-slack-integration
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+    environment:
+      SLACK_WEBHOOK_URL: ''
+      IQ_SECRET_KEY: ''
+
+plugins:
+  - serverless-offline
